@@ -22,6 +22,7 @@ class LudoBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Simple Ludo Board")),
+      backgroundColor: Colors.blueAccent,
       body: Center(
         child: AspectRatio(
           aspectRatio: 1, // make sure it's a square
