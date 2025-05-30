@@ -9,52 +9,52 @@ class LudoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ludo Game',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: LudoBoard(),
-      debugShowCheckedModeBanner: false,
-    );
+    return MaterialApp(home: LudoBoard(), debugShowCheckedModeBanner: false);
   }
 }
 
 class LudoBoard extends StatelessWidget {
   final int gridSize = 15;
 
-  const LudoBoard({super.key});
+  const LudoBoard({super.key}); // 15x15 Ludo board
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Ludo Board")),
+      appBar: AppBar(title: Text("Simple Ludo Board")),
       body: Center(
         child: AspectRatio(
-          aspectRatio: 1,
+          aspectRatio: 1, // make sure it's a square
           child: GridView.builder(
             itemCount: gridSize * gridSize,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: gridSize,
             ),
             itemBuilder: (context, index) {
-              final row = index ~/ gridSize;
-              final col = index % gridSize;
+              int row = index ~/ gridSize;
+              int col = index % gridSize;
 
               Color color = Colors.white;
-              if (row < 6 && col < 6) {
-                color = Colors.red[200]!; // Red zone
-              } else if (row < 6 && col > 8)
-                // ignore: curly_braces_in_flow_control_structures
-                color = Colors.green[200]!; // Green zone
+
+              // Red Home (Top-Left)
+              if (row < 6 && col < 6)
+                color = Colors.red[300]!;
+              // Green Home (Top-Right)
+              else if (row < 6 && col > 8)
+                color = Colors.green[300]!;
+              // Yellow Home (Bottom-Left)
               else if (row > 8 && col < 6)
-                // ignore: curly_braces_in_flow_control_structures
-                color = Colors.yellow[200]!; // Yellow zone
+                color = Colors.yellow[300]!;
+              // Blue Home (Bottom-Right)
               else if (row > 8 && col > 8)
-                // ignore: curly_braces_in_flow_control_structures
-                color = Colors.blue[200]!; // Blue zone
+                color = Colors.blue[300]!;
+              // Middle Path
+              else if (col == 7 || row == 7)
+                color = Colors.grey[300]!;
 
               return Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 0.3),
+                  border: Border.all(color: Colors.black, width: 0.2),
                   color: color,
                 ),
               );
